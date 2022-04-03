@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS currency_type;

@@ -1,36 +1,32 @@
-CREATE TABLE "currency_type" (
-  "id" bigserial PRIMARY KEY,
-  "name" varchar
-);
-
-CREATE TABLE "account" (
+CREATE TABLE "accounts" (
   "id" bigserial PRIMARY KEY,
   "name" varchar NOT NULL,
-  "account_number" varchar NOT NULL,
   "balance" float DEFAULT 0
 );
 
-CREATE TABLE "payments" (
+INSERT INTO "accounts" VALUES
+	(1, 'account_one', 1000),
+	(2, 'account_two', 2000.96),
+  (3, 'account_three', 7000),
+  (4, 'account_four', 5000.86);
+
+
+CREATE TABLE "transactions" (
   "id" bigserial PRIMARY KEY,
-  "from_account_id" bigint NOT NULL,
-  "to_account_id" bigint NOT NULL,
-  "currency_type_id" bigint NOT NULL,
-  "direction" varchar NOT NULL,
+  "from_account" bigint NOT NULL,
+  "to_account" bigint NOT NULL,
+  "transaction_type" VARCHAR NOT NULL,
+  "currency_type" VARCHAR DEFAULT 'USD',
   "amount" float DEFAULT 0
 );
 
-ALTER TABLE "payments" ADD FOREIGN KEY ("from_account_id") REFERENCES "account" ("id");
+ALTER TABLE "transactions" ADD FOREIGN KEY ("from_account") REFERENCES "accounts" ("id");
 
-ALTER TABLE "payments" ADD FOREIGN KEY ("to_account_id") REFERENCES "account" ("id");
+ALTER TABLE "transactions" ADD FOREIGN KEY ("to_account") REFERENCES "accounts" ("id");
 
-ALTER TABLE "payments" ADD FOREIGN KEY ("currency_type_id") REFERENCES "currency_type" ("id");
+CREATE INDEX ON "accounts" ("name");
 
-CREATE INDEX ON "account" ("name");
+CREATE INDEX ON "transactions" ("from_account", "to_account");
 
-CREATE INDEX ON "account" ("account_number");
 
-CREATE INDEX ON "payments" ("from_account_id", "to_account_id");
 
-COMMENT ON COLUMN "account"."name" IS 'account name required';
-
-COMMENT ON COLUMN "account"."account_number" IS 'account number required';

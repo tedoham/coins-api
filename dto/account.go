@@ -1,9 +1,11 @@
 package dto
 
 type AccountRequest struct {
-	StatusID string `json:"delivery_status_id"`
+	AccountId string `json:"account_id"`
 }
 
 type AccountResponse struct {
-	StatusID string `json:"delivery_status_id"`
+	AccountId string `json:"account_id"`
+	Name      string `json:"account_name"`
+	Balance   string `json:"balance"`
 }

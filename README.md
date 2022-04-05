@@ -17,5 +17,9 @@
 6 - Once it is run then the API is ready on `http://localhost:8081/`
 
 7 - Finally use postman to access the API
+    
+    -> `http://localhost:8081/accounts` - to see all accounts
+    -> `http://localhost:8081/payments` - to see all payments
+    -> `http://localhost:8081/transfer` - to make trasfers
 
 enjoy...

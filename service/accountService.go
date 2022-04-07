@@ -6,6 +6,7 @@ import (
 	"github.com/tedoham/coins-api/errs"
 )
 
+//go:generate mockgen -destination=../mocks/service/mockAccountService.go -package=mock github.com/tedoham/coins-api/service AccountService
 type AccountService interface {
 	ListAllAccount() ([]dto.AccountResponse, *errs.AppError)
 	ListAllPayments() ([]dto.TransactionResponse, *errs.AppError)

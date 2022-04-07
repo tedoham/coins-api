@@ -30,16 +30,16 @@ func Start() {
 
 	// define routes
 	router.
-		HandleFunc("/accounts", account.GetAccounts).
+		HandleFunc("/accounts", account.getAccounts).
 		Methods(http.MethodGet).
 		Name("GetAccounts")
 	router.
-		HandleFunc("/payments", account.GetPayments).
+		HandleFunc("/payments", account.getPayments).
 		Methods(http.MethodGet).
 		Name("GetPayments")
 
 	router.
-		HandleFunc("/transfer", account.MakeTransfer).
+		HandleFunc("/transfer", account.makeTransfer).
 		Methods(http.MethodPost).
 		Name("MakeTransfer")
 

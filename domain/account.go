@@ -32,6 +32,7 @@ func (t AccountList) ToDto() dto.AccountResponse {
 	}
 }
 
+//go:generate mockgen -destination=../mocks/domain/mockAccounRepository.go -package=mock github.com/tedoham/coins-api/domain AccountRepository
 type AccountRepository interface {
 	SaveTransaction(transaction Transaction) (*Transaction, *errs.AppError)
 	FindBy(accountId string) (*Account, *errs.AppError)

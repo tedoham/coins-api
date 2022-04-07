@@ -12,7 +12,7 @@ type AccountHandlers struct {
 	service service.AccountService
 }
 
-func (ch AccountHandlers) GetAccounts(w http.ResponseWriter, r *http.Request) {
+func (ch *AccountHandlers) getAccounts(w http.ResponseWriter, r *http.Request) {
 
 	accounts, err := ch.service.ListAllAccount()
 
@@ -23,7 +23,7 @@ func (ch AccountHandlers) GetAccounts(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (ch AccountHandlers) GetPayments(w http.ResponseWriter, r *http.Request) {
+func (ch *AccountHandlers) getPayments(w http.ResponseWriter, r *http.Request) {
 
 	payments, err := ch.service.ListAllPayments()
 
@@ -34,7 +34,7 @@ func (ch AccountHandlers) GetPayments(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h AccountHandlers) MakeTransfer(w http.ResponseWriter, r *http.Request) {
+func (h *AccountHandlers) makeTransfer(w http.ResponseWriter, r *http.Request) {
 
 	// decode incoming request
 	var request dto.TransactionRequest

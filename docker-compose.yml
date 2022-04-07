@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: coinsdb
+    ports:
+      - 5432:5432
+  
+  api:
+    container_name: api
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      DB_SOURCE: postgresql://root:secret@postgres:5432/coinsdb?sslmode=disable
+    networks:
+      - default
+    depends_on:
+      - postgres
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    command: ["/app/main"]
